@@ -35,16 +35,15 @@
 				<td>Contact Number :</td>
 				<td><form:input path="contactNumber" /></td>
 			</tr>
-			tr>
-			<td><input type="reset" value="Reset"></td>
-			<td><input type="submit" value="Save" /></td>
+			<tr>
+				<td><input type="reset" value="Reset"></td>
+				<td><input type="submit" value="Save" /></td>
 			</tr>
 
 		</table>
-
-
-
 	</form:form>
+	
+	<a href = "http://localhost:8083/allContacts">View All Contacts</a>
 
 </body>
 </html>

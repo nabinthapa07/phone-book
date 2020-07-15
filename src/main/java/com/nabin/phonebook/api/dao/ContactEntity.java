@@ -23,6 +23,7 @@ import lombok.Data;
 @Table(name = "CONTACT_DTLS")
 public class ContactEntity {
 	
+	
 	@Id
 	@Column(name = "CONTACT_ID")
 	@SequenceGenerator(name = "cid_gen_seq",sequenceName = "CONTACT_ID_SEQ",allocationSize = 1)

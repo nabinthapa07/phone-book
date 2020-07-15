@@ -1,5 +1,7 @@
 package com.nabin.phonebook.api.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +36,13 @@ public class ContactInfoController {
 		}
 		return "contactInfo";
 		
+	}
+	
+	@GetMapping("/allContacts")
+	public String getAllContacts(Model model) {
+		List<Contact> contactsSaved = service.getAllContacts();
+		model.addAttribute("contacts",contactsSaved);
+		return "contactInfo";
 	}
 	
 	
