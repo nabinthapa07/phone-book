@@ -1,7 +1,8 @@
 package com.nabin.phonebook.api.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +30,44 @@ public class ContactServiceImpl implements ContactService{
 
 	@Override
 	public List<Contact> getAllContacts() {
-		List<Contact> contacts = new ArrayList<Contact>();
 		
 		List<ContactEntity> entities = contactDtlRepository.findAll();
-		for(ContactEntity entity : entities ) {
+
+		//legacy approach
+		//List<Contact> contacts = new ArrayList<Contact>();
+
+//		for(ContactEntity entity : entities ) {
+//			Contact contact = new Contact();
+//			BeanUtils.copyProperties(entity, contact);
+//			contacts.add(contact);
+//		}
+		
+		//java 8 approach
+//		List<Contact> contacts = entities.stream().map(entity ->{
+//			Contact contact = new Contact();
+//			BeanUtils.copyProperties(entity, contact);
+//			return contact;
+//		}).collect(Collectors.toList());
+		
+		
+		return entities.stream().map(entity ->{
 			Contact contact = new Contact();
 			BeanUtils.copyProperties(entity, contact);
-			contacts.add(contact);
-		}
-		return contacts;
+			return contact;
+		}).collect(Collectors.toList());
 	}
 
 	@Override
 	public Contact getCotactById(Integer id) {
-		// TODO Auto-generated method stub
+		
+		Optional<ContactEntity> findById = contactDtlRepository.findById(id);
+		if(findById.isPresent()) {
+		ContactEntity contactEntity = findById.get();
+		Contact contact = new Contact();
+		BeanUtils.copyProperties(contactEntity, contact);
+		return contact;
+		}
+		
 		return null;
 	}
 
