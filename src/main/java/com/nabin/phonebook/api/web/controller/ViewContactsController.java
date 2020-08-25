@@ -3,6 +3,7 @@ package com.nabin.phonebook.api.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +24,16 @@ public class ViewContactsController {
 		model.addAttribute("contact", contactRetrieved);
 		return "contactInfo";
 	}
+	
+	@RequestMapping("/deleteContact")
+	public String deleteContactById(@RequestParam("contactId") Integer contactId) {
+		boolean isDeleted =contactService.deleteContact(contactId);
+		if(isDeleted) {
+			return "redirect:/allContacts";
+		}
+		return null;
+	}
+	
 	
 	
 	

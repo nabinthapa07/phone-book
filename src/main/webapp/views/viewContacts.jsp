@@ -7,8 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>View All</title>
+<script type="text/javascript">
+	function deleteConfirm(){
+		
+		return confirm("Are you sure, You want to delete?");
+	}
+
+
+</script>
 </head>
 <body>
+	<a href="http://localhost:8083/PhoneBook/">+AddContact</a>
 	<form:form action="allContacts" modelAttribute="contacts" method="get">
 		<table border="1">
 
@@ -32,7 +41,7 @@
 						<td>${c.contactNumber}</td>
 						<td>
 							<a href="editContact?cId=${c.contactId}">Edit</a> |
-							<a href="">Delete</a>
+							<a href="deleteContact?contactId=${c.contactId }" onclick="deleteConfirm()">Delete</a>
 						</td>
 					</tr>
 
